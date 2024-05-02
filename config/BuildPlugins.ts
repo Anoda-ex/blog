@@ -1,5 +1,4 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -14,6 +13,6 @@ export default function ({ paths, isDev }: BuildOptions): webpack.WebpackPluginI
     ),
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
-    ...(isDev ? [] : [new BundleAnalyzerPlugin({ openAnalyzer: false })]),
+    ...(isDev ? [new BundleAnalyzerPlugin({ openAnalyzer: false })] : []),
   ];
 }
