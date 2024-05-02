@@ -1,21 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from 'shared/config/decorators/themeDecorator';
 import { Theme } from 'app/providers/ThemeProvider/lib/ThemeContext';
 import { Loader } from 'shared/ui/Loader/Loader';
+import { ComponentStory } from '@storybook/react';
 
 const meta = {
   title: 'widgets/Loader',
   component: Loader,
-  tags: ['autodocs'],
-} satisfies Meta<typeof Loader>;
+} as ComponentMeta<typeof Loader>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
 
-export const Light: Story = {
-  args: {},
-};
-export const Dark: Story = {
-  args: {},
-  decorators: [ThemeDecorator(Theme.DARK)],
-};
+export const Light = Template.bind({});
+export const Dark = Template.bind({});
+Dark.decorators = [ThemeDecorator(Theme.DARK)];
