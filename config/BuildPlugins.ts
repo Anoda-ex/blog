@@ -13,6 +13,10 @@ export default function ({ paths, isDev }: BuildOptions): webpack.WebpackPluginI
     ),
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
-    ...(isDev ? [new BundleAnalyzerPlugin({ openAnalyzer: false })] : []),
+    // ...(isDev ? [new BundleAnalyzerPlugin({ openAnalyzer: false })] : []),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }),
+    new webpack.DefinePlugin({
+      __IS_DEV__: JSON.stringify(isDev),
+    }),
   ];
 }

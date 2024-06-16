@@ -6,12 +6,15 @@ import { useTheme } from 'app/providers/ThemeProvider';
 import { AppRouter } from 'app/providers/Router';
 import Navbar from 'widgets/Navbar/ui/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
+import { useAppDispatch } from 'shared/lib/reduxHooks/reduxHooks';
+import { userActions } from 'entities/User';
 
 const App = () => {
   const { theme } = useTheme();
-  // useEffect(() => {
-  //   throw Error('123');
-  // }, []);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(userActions.initAuthData());
+  }, []);
   return (
     <div className={classNames('app', {}, [theme])}>
       <Navbar />

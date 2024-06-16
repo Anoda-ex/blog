@@ -2,6 +2,7 @@
   cursor: pointer;
   color: var(--primary-color);
   padding: 10px 15px;
+  display: block;
 }
 
 .clear,
@@ -63,4 +64,9 @@
 
 .size-xl {
   font: var(--font-xl);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
