@@ -4,7 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildOptions } from './types/config';
 
-export default function ({ paths, isDev }: BuildOptions): webpack.WebpackPluginInstance[] {
+export default function ({ paths, isDev, api }: BuildOptions): webpack.WebpackPluginInstance[] {
   return [
     new HtmlWebpackPlugin(
       {
@@ -17,6 +17,7 @@ export default function ({ paths, isDev }: BuildOptions): webpack.WebpackPluginI
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
+      __API__: JSON.stringify(api),
     }),
   ];
 }

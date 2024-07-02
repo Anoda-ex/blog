@@ -2,7 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import { LoginModal } from 'features/AuthByUsername';
-import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/reduxHooks/reduxHooks';
 import { getUserAuthData, userActions } from 'entities/User';
 import cls from './Navbar.module.scss';
 

@@ -10,7 +10,7 @@ interface LoginModalProps extends ModalControlProps{
 export const LoginModal:FC<LoginModalProps> = ({ className, isOpen, onClose }) => (
   <Modal className={classNames('', {}, [className])} isOpen={isOpen} onClose={onClose} lazy>
     <Suspense fallback={<Loader />}>
-      <LoginFormAsync />
+      <LoginFormAsync onClose={onClose} />
     </Suspense>
   </Modal>
 );

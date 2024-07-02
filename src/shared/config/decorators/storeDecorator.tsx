@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootState, StoreProvider } from 'app/providers/StoreProvider';
-import { DeepPartial, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
+import { ReducersMapObject } from '@reduxjs/toolkit';
 
 export const StoreDecorator = (
   state: DeepPartial<RootState>,

@@ -1,12 +1,8 @@
-import { DeepPartial, Dispatch } from '@reduxjs/toolkit';
-import { RootState } from 'app/providers/StoreProvider';
 import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
 import axios from 'axios';
 import { userActions } from 'entities/User';
 import { TestAsyncThunk } from 'shared/config/tests/TestAsyncThunk';
 
-jest.mock('axios');
-const mockedAxios = jest.mocked(axios, true);
 describe('login by username', () => {
   beforeEach(() => {
     jest.spyOn(Storage.prototype, 'setItem');
@@ -41,10 +37,10 @@ describe('login by username', () => {
   // });
   test('login by username fulfiled', async () => {
     const userData = { username: '123', id: '1' };
-    mockedAxios.post.mockReturnValue(Promise.resolve({ data: userData }));
     const thunk = new TestAsyncThunk(loginByUsername);
+    thunk.api.post.mockReturnValue(Promise.resolve({ data: userData }));
     const result = await thunk.callThunk({ username: '123', password: '123' });
-    expect(mockedAxios.post).toHaveBeenCalled();
+    expect(thunk.api.post).toHaveBeenCalled();
     expect(localStorage.setItem).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(userActions.setAuthData({ username: '123', id: '1' }));
@@ -52,11 +48,11 @@ describe('login by username', () => {
     expect(result.payload).toBe(userData);
   });
   test('login by username rejected', async () => {
-    mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }));
     const thunk = new TestAsyncThunk(loginByUsername);
+    thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }));
     const result = await thunk.callThunk({ username: '123', password: '123' });
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(mockedAxios.post).toHaveBeenCalled();
+    expect(thunk.api.post).toHaveBeenCalled();
     expect(localStorage.setItem).not.toHaveBeenCalled();
     expect(result.payload).toBe('Error');
   });

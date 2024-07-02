@@ -24,37 +24,13 @@
   right: -32px;
 }
 
-.linkWrapper {
-  display: flex;
-  align-items: center;
-}
-
-.linkIcon path {
-  fill: var(--inverted-primary-color);
-}
-
-.link {
-  margin-left: 10px;
-}
-
-.linkWrapper + .linkWrapper {
-  margin-top: 10px;
-}
-
-.links {
-  padding: 10px;
-}
-
 .collapsed {
   width: var(--sidebar-width-collapsed);
+}
 
-  .link {
-    opacity: 0;
-    width: 0;
-    transition: all 0.3s;
-  }
-
-  .linkWrapper {
-    justify-content: center;
-  }
+.items {
+  margin-top: 20px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
 }

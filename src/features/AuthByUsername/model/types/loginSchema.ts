@@ -4,5 +4,5 @@ export interface UserCredentials{
 }
 export interface LoginSchema extends UserCredentials{
     isLoading: boolean,
-    error: string|null
+    error?: string
 }

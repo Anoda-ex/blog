@@ -20,9 +20,9 @@ Primary.args = {
   children: 'link',
 };
 
-export const Inverted = Template.bind({});
-Inverted.args = {
-  theme: AppLinkTheme.INVERTED,
+export const Secondary = Template.bind({});
+Secondary.args = {
+  theme: AppLinkTheme.SECONDARY,
   to: '/',
   children: 'link',
 };
@@ -35,10 +35,10 @@ PrimaryDark.args = {
 };
 PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const InvertedDark = Template.bind({});
-InvertedDark.args = {
-  theme: AppLinkTheme.INVERTED,
+export const SecondaryDark = Template.bind({});
+SecondaryDark.args = {
+  theme: AppLinkTheme.SECONDARY,
   to: '/',
   children: 'link',
 };
-InvertedDark.decorators = [ThemeDecorator(Theme.DARK)];
+SecondaryDark.decorators = [ThemeDecorator(Theme.DARK)];

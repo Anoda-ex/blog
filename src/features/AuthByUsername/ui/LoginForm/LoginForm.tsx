@@ -2,32 +2,32 @@ import React, { FC, useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import Button from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
-import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/reduxHooks/reduxHooks';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import DynamicModuleLoader from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { ReducersList } from 'app/providers/StoreProvider';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import { getLoginState } from '../../model/selectors/getCounter/getLoginState';
+import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
 import cls from './LoginForm.module.scss';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 
 interface LoginFormProps {
-  className?: string
+  className?: string,
+  onClose?: () => void
 }
 const reducers:ReducersList = {
   loginForm: loginReducer,
 };
-const LoginForm:FC<LoginFormProps> = ({ className }) => {
+const LoginForm:FC<LoginFormProps> = ({ className, onClose }) => {
   const dispatch = useAppDispatch();
   const {
     username, password, isLoading, error,
   } = useAppSelector(getLoginState);
-  // const store = useStore() as ReduxStoreWithManager;
-  // useEffect(() => {
-  //   store.reducerManager.add('loginForm', loginReducer);
-  // }, []);
-  const onLoginClick = useCallback(() => {
-    dispatch(loginByUsername({ username, password }));
+  const onLoginClick = useCallback(async () => {
+    const result = await dispatch(loginByUsername({ username, password }));
+    if (result.meta.requestStatus === 'fulfilled') {
+      onClose?.();
+    }
   }, [dispatch, password, username]);
   return (
     <DynamicModuleLoader reducers={reducers}>

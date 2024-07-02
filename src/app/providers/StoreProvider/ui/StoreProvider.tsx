@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
 import { createReduxStore } from 'app/providers/StoreProvider/config/store';
 import { Provider } from 'react-redux';
-import { DeepPartial, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
+import { ReducersMapObject } from '@reduxjs/toolkit';
 import { RootState } from 'app/providers/StoreProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface StoreProviderProps {
   children: ReactNode,
@@ -15,8 +16,9 @@ const StoreProvider = (props: StoreProviderProps) => {
     initialState,
     additionalReducers,
   } = props;
+  const navigate = useNavigate();
 
-  const store = createReduxStore(initialState as RootState, additionalReducers as ReducersMapObject<RootState>);
+  const store = createReduxStore(initialState as RootState, additionalReducers as ReducersMapObject<RootState>, navigate);
 
   return (
     <Provider store={store}>

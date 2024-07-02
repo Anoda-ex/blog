@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import { DeepPartial } from '@reduxjs/toolkit';
 import { RootState, StoreProvider } from 'app/providers/StoreProvider';
 
 interface options {
@@ -9,11 +8,11 @@ interface options {
   initialState?: DeepPartial<RootState>
 }
 const componentRender = (component: ReactNode, options: options = {}) => render(
-  <StoreProvider initialState={options.initialState}>
-    <MemoryRouter initialEntries={[options.initalRoute || '/']}>
+  <MemoryRouter initialEntries={[options.initalRoute || '/']}>
+    <StoreProvider initialState={options.initialState}>
       {component}
-    </MemoryRouter>
-  </StoreProvider>,
+    </StoreProvider>
+  </MemoryRouter>,
 );
 
 export default componentRender;

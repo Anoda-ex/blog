@@ -1,6 +1,6 @@
 import Button from 'shared/ui/Button/Button';
 import { getCounterValue } from 'entities/Counter/model/selectors/getCounterValue/getCounterValue';
-import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/reduxHooks/reduxHooks';
 import { counterActions } from '../model/slice/counterSlice';
 
 export const Counter = () => {

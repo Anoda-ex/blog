@@ -6,7 +6,7 @@ import { useTheme } from 'app/providers/ThemeProvider';
 import { AppRouter } from 'app/providers/Router';
 import Navbar from 'widgets/Navbar/ui/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
-import { useAppDispatch } from 'shared/lib/reduxHooks/reduxHooks';
+import { useAppDispatch } from 'shared/lib/hooks/reduxHooks/reduxHooks';
 import { userActions } from 'entities/User';
 
 const App = () => {
