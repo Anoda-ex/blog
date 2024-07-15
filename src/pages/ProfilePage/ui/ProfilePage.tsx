@@ -1,10 +1,11 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import {
-  fetchProfileData,
+  fetchProfileData, getProfileData,
   getProfileError,
   getProfileForm,
   getProfileIsLoading,
   getProfileReadonly,
+  getValidateErrors,
   profileActions,
   ProfileCard,
   profileReducer,
@@ -16,6 +17,8 @@ import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
 import DynamicModuleLoader from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { ReducersList } from 'app/providers/StoreProvider';
+import { ValidateProfileError } from 'entities/Profile/model/types/profile';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 const reducers: ReducersList = {
@@ -29,9 +32,18 @@ interface ProfilePageProps {
 const ProfilePage = ({ className }: ProfilePageProps) => {
   const dispatch = useAppDispatch();
   const formData = useSelector(getProfileForm);
+  const data = useSelector(getProfileData);
   const isLoading = useSelector(getProfileIsLoading);
   const error = useSelector(getProfileError);
   const readonly = useSelector(getProfileReadonly);
+  const validateErrors = useSelector(getValidateErrors);
+  const validateErrorsText = {
+    [ValidateProfileError.SERVER_ERROR]: 'Серверная ошибка при сохранении',
+    [ValidateProfileError.INCORRECT_COUNTRY]: 'Некорректный регион',
+    [ValidateProfileError.NO_DATA]: 'Данные не указаны',
+    [ValidateProfileError.INCORRECT_USER_DATA]: 'Имя и фамилия обязательны',
+    [ValidateProfileError.INCORRECT_AGE]: 'Некорректный возраст',
+  };
 
   useEffect(() => {
     dispatch(fetchProfileData());
@@ -72,7 +84,14 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <div className={classNames('', {}, [className])}>
-        <ProfilePageHeader />
+        <ProfilePageHeader canEdit={!!data} />
+        {validateErrors?.length && validateErrors.map((err) => (
+          <Text
+            key={err}
+            theme={TextTheme.ERROR}
+            text={validateErrorsText[err]}
+          />
+        ))}
         <ProfileCard
           data={formData}
           isLoading={isLoading}

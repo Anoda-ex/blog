@@ -25,5 +25,14 @@
       "password": "123"
     }
   ],
-  "profile": {}
+  "profile": {
+    "first": "Alexandr1",
+    "lastname": "Alex",
+    "age": 22,
+    "currency": "USD",
+    "country": "Ukraine",
+    "city": "Kiev",
+    "username": "admin",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/512px-React_Logo_SVG.svg.png?20231112063719"
+  }
 }

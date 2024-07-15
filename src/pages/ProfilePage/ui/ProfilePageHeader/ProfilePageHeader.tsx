@@ -9,11 +9,13 @@ import cls from './ProfilePageHeader.module.scss';
 
 interface ProfilePageHeaderProps {
     className?: string;
+    canEdit?: boolean;
 }
 
 export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
   const {
     className,
+    canEdit,
   } = props;
 
   const readonly = useSelector(getProfileReadonly);
@@ -34,34 +36,38 @@ export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
   return (
     <div className={classNames(cls.ProfilePageHeader, {}, [className])}>
       <Text title="Профиль" />
-      {readonly
-        ? (
-          <Button
-            className={cls.editBtn}
-            theme={ButtonTheme.OUTLINED}
-            onClick={onEdit}
-          >
-            Редактировать
-          </Button>
+      {
+        canEdit && (
+          readonly
+            ? (
+              <Button
+                className={cls.editBtn}
+                theme={ButtonTheme.OUTLINED}
+                onClick={onEdit}
+              >
+                Редактировать
+              </Button>
+            )
+            : (
+              <>
+                <Button
+                  className={cls.editBtn}
+                  theme={ButtonTheme.OUTLINE_RED}
+                  onClick={onCancelEdit}
+                >
+                  Отменить
+                </Button>
+                <Button
+                  className={cls.saveBtn}
+                  theme={ButtonTheme.OUTLINED}
+                  onClick={onSave}
+                >
+                  Сохранить
+                </Button>
+              </>
+            )
         )
-        : (
-          <>
-            <Button
-              className={cls.editBtn}
-              theme={ButtonTheme.OUTLINE_RED}
-              onClick={onCancelEdit}
-            >
-              Отменить
-            </Button>
-            <Button
-              className={cls.saveBtn}
-              theme={ButtonTheme.OUTLINED}
-              onClick={onSave}
-            >
-              Сохранить
-            </Button>
-          </>
-        )}
+      }
     </div>
   );
 };
